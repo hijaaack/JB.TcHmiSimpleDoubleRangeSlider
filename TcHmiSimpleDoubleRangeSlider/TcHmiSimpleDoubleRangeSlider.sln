@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3B740506-4966-4147-AB1F-357FE08946EA}") = "TcHmiSimpleDoubleRangeSlider", "TcHmiSimpleDoubleRangeSlider\TcHmiSimpleDoubleRangeSlider.hmiextproj", "{3822423C-1229-4945-A30A-A2F79F90BC30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|TwinCAT HMI = Debug|TwinCAT HMI
+		Release|TwinCAT HMI = Release|TwinCAT HMI
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3822423C-1229-4945-A30A-A2F79F90BC30}.Debug|TwinCAT HMI.ActiveCfg = Debug|TwinCAT HMI
+		{3822423C-1229-4945-A30A-A2F79F90BC30}.Debug|TwinCAT HMI.Build.0 = Debug|TwinCAT HMI
+		{3822423C-1229-4945-A30A-A2F79F90BC30}.Release|TwinCAT HMI.ActiveCfg = Release|TwinCAT HMI
+		{3822423C-1229-4945-A30A-A2F79F90BC30}.Release|TwinCAT HMI.Build.0 = Release|TwinCAT HMI
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B5C7D5A-E14F-4B79-9233-036BEC1AF472}
+	EndGlobalSection
+EndGlobal
