@@ -29,6 +29,13 @@ module TcHmi {
                 }
 
                 protected __elementTemplateRoot!: JQuery;
+                protected __elementRangeSliderDiv!: JQuery;
+                protected __elementRangeSliderInputA!: JQuery;
+                protected __elementRangeSliderInputB!: JQuery;
+                protected __valueA: number | null;
+                protected __valueB: number | null;
+                protected __min: number | null;
+                protected __max: number | null;
 
 				/**
                   * If raised, the control object exists in control cache and constructor of each inheritation level was called.
@@ -40,6 +47,11 @@ module TcHmi {
                     if (this.__elementTemplateRoot.length === 0) {
                         throw new Error('Invalid Template.html');
                     }
+
+                    this.__elementRangeSliderDiv = this.__elementTemplateRoot.find('.range-slider');
+                    this.__elementRangeSliderInputA = this.__elementRangeSliderDiv.find('.range-slider-input-a');
+                    this.__elementRangeSliderInputB = this.__elementRangeSliderDiv.find('.range-slider-input-b');
+
                     // Call __previnit of base class
                     super.__previnit();
                 }
@@ -61,6 +73,16 @@ module TcHmi {
                     /**
                      * Initialize everything which is only available while the control is part of the active dom.
                      */
+                    var $this = this;
+
+                    this.__elementRangeSliderInputA.on('change', function (e) {
+                        $this.__sliderInputChange(e, $this, true);
+                    });
+
+                    this.__elementRangeSliderInputB.on('change', function (e) {
+                        $this.__sliderInputChange(e, $this, false);
+                    });
+
                 }
 
                 /**
@@ -74,6 +96,8 @@ module TcHmi {
                      * Disable everything which is not needed while the control is not part of the active dom.
                      * No need to listen to events for example!
                      */
+                    this.__elementRangeSliderInputA.off('change');
+                    this.__elementRangeSliderInputB.off('change');
                 }
 
                 /**
@@ -94,6 +118,176 @@ module TcHmi {
                     * Free resources like child controls etc.
                     */
                 }
+
+                /**
+                * Gets the value of __max
+                * @returns The current value of Max
+                */
+                getMax(): number | null {
+                    return this.__max;
+                }
+
+                /**
+                 * Sets the value of Max
+                 * @param valueNew The new value for Max
+                 */
+                public setMax(valueNew: number) {
+                    //convert the new value
+                    let convertedValue = TcHmi.ValueConverter.toNumber(valueNew);
+
+                    //if converted value is null, get internal default
+                    if (convertedValue === null || undefined) {
+                        convertedValue = this.getAttributeDefaultValueInternal("Max");
+                    }
+
+                    //save the new value
+                    this.__max = convertedValue;
+
+                    //Inform the system that the function has a changed result
+                    TcHmi.EventProvider.raise(this.__id + ".onFunctionResultChanged", ["getMax"]);
+
+                    //Process the new Value
+                    this.__processValue();
+                }
+
+                /**
+                * Gets the value of __min
+                * @returns The current value of Min
+                */
+                getMin(): number | null {
+                    return this.__min;
+                }
+
+                /**
+                 * Sets the value of Min
+                 * @param valueNew The new value for Min
+                 */
+                public setMin(valueNew: number) {
+                    //convert the new value
+                    let convertedValue = TcHmi.ValueConverter.toNumber(valueNew);
+
+                    //if converted value is null, get internal default
+                    if (convertedValue === null || undefined) {
+                        convertedValue = this.getAttributeDefaultValueInternal("Min");
+                    }
+
+                    //save the new value
+                    this.__min = convertedValue;
+
+                    //Inform the system that the function has a changed result
+                    TcHmi.EventProvider.raise(this.__id + ".onFunctionResultChanged", ["getMin"]);
+
+                    //Process the new Value
+                    this.__processValue();
+                }
+
+                /**
+                * Gets the value of __valueA
+                * @returns The current value of Value A
+                */
+                getValueA(): number | null {
+                    return this.__valueA;
+                }
+
+                /**
+                * Sets the value of Value A
+                * @param valueNew The new value for Value A
+                */
+                public setValueA(valueNew: number) {
+                    //convert the new value
+                    let convertedValue = TcHmi.ValueConverter.toNumber(valueNew);
+
+                    //if converted value is null, get internal default
+                    if (convertedValue === null || undefined) {
+                        convertedValue = this.getAttributeDefaultValueInternal("ValueA");
+                    }
+
+                    //save the new value
+                    this.__valueA = convertedValue;
+
+                    //Inform the system that the function has a changed result
+                    TcHmi.EventProvider.raise(this.__id + ".onFunctionResultChanged", ["getValueA"]);
+
+                    //Process the new Value
+                    this.__processValue();
+                }
+
+                /**
+                * Gets the value of __valueB
+                * @returns The current value of Value B
+                */
+                getValueB(): number | null {
+                    return this.__valueB;
+                }
+
+                /**
+                * Sets the value of Value B
+                * @param valueNew The new value for Value B
+                */
+                public setValueB(valueNew: number) {
+                    //convert the new value
+                    let convertedValue = TcHmi.ValueConverter.toNumber(valueNew);
+
+                    //if converted value is null, get internal default
+                    if (convertedValue === null || undefined) {
+                        convertedValue = this.getAttributeDefaultValueInternal("ValueB");
+                    }
+
+                    //save the new value
+                    this.__valueB = convertedValue;
+
+                    //Inform the system that the function has a changed result
+                    TcHmi.EventProvider.raise(this.__id + ".onFunctionResultChanged", ["getValueB"]);
+
+                    //Process the new Value
+                    this.__processValue();
+                }
+
+                /**
+                 * Processes the Values.
+                 * @function
+                 */
+                protected __processValue(): void {
+                    if (!this.__elementRangeSliderInputA || !this.__elementRangeSliderInputB)
+                        return;
+                    if (this.__min == undefined || this.__max == undefined || this.__valueA == undefined || this.__valueB == undefined)
+                        return;
+
+                    //Write Value to HTML-elements attributes
+                    // @ts-ignore
+                    this.__elementRangeSliderDiv[0].dataset.ticksPosition = `--min:${this.__min}; --max:${this.__max}; --value-a:${this.__valueA}; --value-b:${this.__valueB}; --text-value-a:"${this.__valueA}; --text-value-b:"${this.__valueB}";`;
+                    // @ts-ignore
+                    this.__elementRangeSliderDiv[0].attributes[2].nodeValue = `--min:${this.__min}; --max:${this.__max}; --value-a:${this.__valueA}; --value-b:${this.__valueB}; --text-value-a:"${this.__valueA}; --text-value-b:"${this.__valueB}";`;
+                    // @ts-ignore
+                    this.__elementRangeSliderInputA[0].valueAsNumber = this.__valueA;
+                    // @ts-ignore
+                    this.__elementRangeSliderInputA[0].min = String(this.__min);
+                    // @ts-ignore
+                    this.__elementRangeSliderInputA[0].max = String(this.__max);
+                    // @ts-ignore
+                    this.__elementRangeSliderInputB[0].valueAsNumber = this.__valueB;
+                    // @ts-ignore
+                    this.__elementRangeSliderInputB[0].min = String(this.__min);
+                    // @ts-ignore
+                    this.__elementRangeSliderInputB[0].max = String(this.__max);
+                }
+
+                /**
+                 * Processes the Slider Change Events.
+                 * @function
+                 */
+                protected __sliderInputChange(e: any, $this: this, valueA: boolean): void {
+
+                    //Set Values
+                    valueA ? this.setValueA(e.target.value) : this.setValueB(e.target.value);
+
+                    //raise common event
+                    TcHmi.EventProvider.raise($this.getId() + '.onSliderInputChanged');
+
+                    //raise specific event
+                    valueA ? TcHmi.EventProvider.raise($this.getId() + '.onSliderInputValueAChanged') : TcHmi.EventProvider.raise($this.getId() + '.onSliderInputValueBChanged');
+
+                }
             }
         }
     }
@@ -101,4 +295,4 @@ module TcHmi {
 /**
 * Register Control
 */
-TcHmi.Controls.registerEx('TcHmiSimpleDoubleRangeSliderControl', 'TcHmi.Controls.TcHmiSimpleDoubleRangeSlider', TcHmi.Controls.TcHmiSimpleDoubleRangeSlider.TcHmiSimpleDoubleRangeSliderControl);
+TcHmi.Controls.registerEx('TcHmiSimpleDoubleRangeSlider', 'TcHmi.Controls.TcHmiSimpleDoubleRangeSlider', TcHmi.Controls.TcHmiSimpleDoubleRangeSlider.TcHmiSimpleDoubleRangeSliderControl);

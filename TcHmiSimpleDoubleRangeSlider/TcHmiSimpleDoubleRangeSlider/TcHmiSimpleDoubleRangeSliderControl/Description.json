@@ -1,9 +1,9 @@
 ﻿{
   "$schema": "../.hmiframework/Schema/ControlDescription.Schema.json",
   "apiVersion": 1,
-  "name": "TcHmiSimpleDoubleRangeSliderControl",
+  "name": "TcHmiSimpleDoubleRangeSlider",
   "namespace": "TcHmi.Controls.TcHmiSimpleDoubleRangeSlider",
-  "displayName": "TcHmiSimpleDoubleRangeSliderControl",
+  "displayName": "TcHmiSimpleDoubleRangeSlider",
   "version": {
     "full": "1.0.0.0",
     "major": 1,
@@ -14,12 +14,12 @@
   "visible": true,
   "themeable": "Standard",
   "base": "TcHmi.Controls.System.TcHmiControl",
-  "description": "This description text will be used as a Tooltip in Visual Studio.",
+  "description": "Simple Double Range Slider.",
   "properties": {
     "containerControl": false,
     "geometry": {
-      "width": 150,
-      "height": 150
+      "width": 300,
+      "height": 50
     }
   },
   "template": "Template.html",
@@ -83,10 +83,111 @@
         }
     },
   "attributes": [
+    {
+      "name": "data-tchmi-rangeslider-value-a",
+      "displayName": "ValueA",
+      "propertyName": "ValueA",
+      "propertySetterName": "setValueA",
+      "propertyGetterName": "getValueA",
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "RangeSlider",
+      "description": "Range Slider Value A.",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": false,
+      "defaultValue": 10,
+      "defaultValueInternal": 10
+    },
+    {
+      "name": "data-tchmi-rangeslider-value-b",
+      "displayName": "ValueB",
+      "propertyName": "ValueB",
+      "propertySetterName": "setValueB",
+      "propertyGetterName": "getValueB",
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "RangeSlider",
+      "description": "Range Slider Value B.",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": false,
+      "defaultValue": 75,
+      "defaultValueInternal": 75
+    },
+    {
+      "name": "data-tchmi-doublerangeslider-min",
+      "displayName": "Min",
+      "propertyName": "Min",
+      "propertySetterName": "setMin",
+      "propertyGetterName": "getMin",
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "RangeSlider",
+      "description": "Range Slider Min Value.",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": false,
+      "defaultValue": 0,
+      "defaultValueInternal": 0
+    },
+    {
+      "name": "data-tchmi-doublerangeslider-max",
+      "displayName": "Max",
+      "propertyName": "Max",
+      "propertySetterName": "setMax",
+      "propertyGetterName": "getMax",
+      "visible": true,
+      "type": "tchmi:general#/definitions/Number",
+      "category": "RangeSlider",
+      "description": "Range Slider Max Value.",
+      "requiredOnCompile": false,
+      "readOnly": false,
+      "bindable": true,
+      "heritable": false,
+      "defaultValue": 100,
+      "defaultValueInternal": 100
+    }
   ],
-  "attributeCategories": [],
+  "attributeCategories": [
+    {
+      "name": "RangeSlider",
+      "displayPriority": 10
+    }
+  ],
   "functions": [],
-  "events": [],
+  "events": [
+    {
+      "name": ".onSliderInputChanged",
+      "displayName": ".onSliderInputChanged",
+      "visible": true,
+      "displayPriority": 10,
+      "category": "Control",
+      "description": "The onSliderInputChanged event is fired when the slider value has changed.",
+      "heritable": true
+    },
+    {
+      "name": ".onSliderInputValueAChanged",
+      "displayName": ".onSliderInputValueAChanged",
+      "visible": true,
+      "displayPriority": 10,
+      "category": "Control",
+      "description": "The onSliderInputValueAChanged event is fired when the slider value A has changed.",
+      "heritable": true
+    },
+    {
+      "name": ".onSliderInputValueBChanged",
+      "displayName": ".onSliderInputValueBChanged",
+      "visible": true,
+      "displayPriority": 10,
+      "category": "Control",
+      "description": "The onSliderInputValueBChanged event is fired when the slider value B has changed.",
+      "heritable": true
+    }
+  ],
   "dataTypes": [
     {
       "schema": "Schema/Types.Schema.json"
