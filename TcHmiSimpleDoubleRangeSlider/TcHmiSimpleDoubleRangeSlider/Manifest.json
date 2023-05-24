@@ -1,4 +1,4 @@
-﻿{
+{
   "modules": [
     {
       "type": "Package",
@@ -14,8 +14,8 @@
   "provideMetadata": {
     "toolbox": {
       "TcHmiSimpleDoubleRangeSlider": {
-        "1632": "JB: Controls",
-        "200": "TcHmiSimpleDoubleRangeSlider"
+        "200": "TcHmiSimpleDoubleRangeSlider",
+        "1632": "JB: Controls"
       }
     }
   },

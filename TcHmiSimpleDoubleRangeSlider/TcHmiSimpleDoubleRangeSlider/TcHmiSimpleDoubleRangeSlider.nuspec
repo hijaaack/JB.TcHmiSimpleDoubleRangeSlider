@@ -1,22 +1,22 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>JB.TcHmiSimpleDoubleRangeSlider</id>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <description>Simple Double Range Slider</description>
     <authors>Jack Borelius</authors>
     <title>TcHmiSimpleDoubleRangeSlider</title>
     <owners>Jack Borelius</owners>
     <projectUrl>https://github.com/hijaaack/JB.TcHmiSimpleDoubleRangeSlider</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2021</copyright>
+    <releaseNotes>Updated packages to 760.37 and disabled the new SystemKeyboard to be triggered when using this control.</releaseNotes>
+    <copyright>Copyright 2023</copyright>
     <tags>TwinCAT HMI</tags>
     <license type="expression">MIT</license>
     <icon>images/logo.png</icon>
     <dependencies>
       <group targetFramework="native1.12-tchmi">
-        <dependency id="Beckhoff.TwinCAT.HMI.Framework" version="12.750.1" />
+        <dependency id="Beckhoff.TwinCAT.HMI.Framework" version="12.760.37" />
       </group>
     </dependencies>
   </metadata>
